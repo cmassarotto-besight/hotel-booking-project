@@ -1,0 +1,26 @@
+version: '3'
+services:
+  api:
+    build: ./backend
+    ports:
+      - 2000:4000
+    develop:
+      watch:
+        - path: ./backend/package.json
+          action: rebuild
+        - path: ./backend/package-lock.json
+          action: rebuild
+        - path: ./backend
+          action: sync
+  web:
+    build: ./frontend
+    ports:
+      - 80:3000
+    develop:
+      watch:
+        - path: ./frontend/package.json
+          action: rebuild
+        - path: ./frontend/package-lock.json
+          action: rebuild
+        - path: ./frontend
+          action: rebuild
